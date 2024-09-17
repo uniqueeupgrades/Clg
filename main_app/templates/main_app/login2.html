@@ -1,0 +1,184 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>CARE Upgrades</title>
+    <link rel="icon" href="{% static 'dist/img/lo.png' %}" type="image/x-icon">
+    <style>
+        * {
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            overflow-y: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('{% static "dist/img/bg.jpg" %}') no-repeat center center fixed; /* Set your background image here */
+            background-size: cover;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-box {
+            background: rgba(241, 247, 254, 0.6); /* Increased transparency */
+            padding: 2em;
+            display: flex;
+            flex-direction: column;
+            border-radius: 30px;
+            box-shadow: 0 0 2em #e6e9f9;
+            gap: 2em;
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+        }
+
+        .login-logo {
+            text-align: center;
+        }
+
+        .login-logo img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .login-logo p {
+            margin: 0;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group {
+            margin-bottom: 1em;
+        }
+
+        .input-group input {
+            outline: none;
+            border: none;
+            border-radius: 20px;
+            padding: 0.5em 1em;
+            box-shadow: 0 0 2em #e6e9f9;
+            font-size: 0.9em;
+            width: 90%; /* Ensure full width */
+        }
+
+        .input-group .input-group-text {
+            border: none;
+            background: transparent;
+        }
+
+        .alert {
+            margin-bottom: 1em;
+        }
+
+        .btn-success {
+            background-color: #3e4684;
+            border: none;
+            border-radius: 30px;
+            color: white;
+            padding: 1em;
+            font-weight: 600;
+            width: 100%;
+        }
+
+        .btn-success:hover {
+            background-color: #333e6b;
+        }
+
+        .input-group input::placeholder {
+            color: black;
+        }
+
+        .icheck-primary {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1em; /* Add space below the checkbox */
+        }
+
+        .icheck-primary label {
+            margin-left: 0.5em;
+        }
+    </style>
+</head>
+
+<body class="hold-transition login-page">
+    <div class="login-box">
+        <div class="login-logo">
+            <img src="{% static 'dist/img/logo.jpg' %}" alt="CARE">
+            <p><b>Management System</b></p>
+        </div>
+        <!-- /.login-logo -->
+        <div class="card">
+            <div class="card-body login-card-body">
+                {% if messages %}
+                <div class="col-12">
+                    {% for message in messages %}
+                    {% if message.tags == 'error' %}
+                    <div class="alert alert-danger text-center">
+                        {{ message }}
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                {% endif %}
+                <form action="doLogin/" method="post">
+                    {% csrf_token %}
+                    <div class="input-group mb-3">
+                        <input required type="email" name='email' class="form-control" placeholder="Email">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input required type="password" name='password' class="form-control" placeholder="Password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="icheck-primary">
+                                <input type="checkbox" id="remember">
+                                <label for="remember">
+                                    Remember Me
+                                </label>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-success btn-block">Log In</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+            </div>
+            <!-- /.login-card-body -->
+        </div>
+    </div>
+    <!-- /.login-box -->
+
+    <!-- jQuery -->
+    <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+    <!-- Bootstrap 4 -->
+    <script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- AdminLTE App -->
+    <script src="{% static 'dist/js/adminlte.min.js' %}"></script>
+</body>
+
+</html>
